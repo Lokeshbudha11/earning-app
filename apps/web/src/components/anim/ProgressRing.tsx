@@ -16,8 +16,8 @@ export function ProgressRing({
   value,
   size = 96,
   stroke = 8,
-  trackClass = "stroke-white/10",
-  fillClass = "stroke-brand-300",
+  trackClass = "stroke-white/25",
+  fillClass = "",
   className,
   children
 }: Props) {
