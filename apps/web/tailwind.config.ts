@@ -57,8 +57,28 @@ const config: Config = {
           600: "#059669",
           700: "#047857"
         },
-        coral: "#f43f5e",
-        sky: "#0ea5e9"
+        coral: {
+          DEFAULT: "#f43f5e",
+          50: "#fff1f2",
+          100: "#ffe4e6",
+          200: "#fecdd3",
+          300: "#fda4af",
+          400: "#fb7185",
+          500: "#f43f5e",
+          600: "#e11d48",
+          700: "#be123c"
+        },
+        sky: {
+          DEFAULT: "#0ea5e9",
+          50: "#f0f9ff",
+          100: "#e0f2fe",
+          200: "#bae6fd",
+          300: "#7dd3fc",
+          400: "#38bdf8",
+          500: "#0ea5e9",
+          600: "#0284c7",
+          700: "#0369a1"
+        }
       },
       fontFamily: {
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],
