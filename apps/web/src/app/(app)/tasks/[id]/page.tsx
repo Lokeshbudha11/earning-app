@@ -36,7 +36,8 @@ export default function TaskDetail() {
 
   function doStart() {
     setStep("doing");
-    const total = task!.durationMin * 60;
+    // Demo runs in seconds; production would use task!.durationMin * 60
+    const total = Math.min(8, task!.durationMin);
     const start = Date.now();
     const id = setInterval(() => {
       const elapsed = Math.min(total, Math.floor((Date.now() - start) / 1000));
