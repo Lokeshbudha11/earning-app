@@ -14,12 +14,11 @@ type RevealProps = {
 export function Reveal({ children, delay = 0, y = 18, className, once = true }: RevealProps) {
   const reduce = useReducedMotion();
   const variants: Variants = {
-    hidden: { opacity: 0, y: reduce ? 0 : y, filter: reduce ? "blur(0px)" : "blur(6px)" },
+    hidden: { opacity: 0, y: reduce ? 0 : y },
     show: {
       opacity: 1,
       y: 0,
-      filter: "blur(0px)",
-      transition: { duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] }
+      transition: { duration: 0.55, delay, ease: [0.16, 1, 0.3, 1] }
     }
   };
 

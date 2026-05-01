@@ -2,75 +2,101 @@ import type { Config } from "tailwindcss";
 
 const config: Config = {
   darkMode: "class",
-  content: [
-    "./src/**/*.{ts,tsx,js,jsx,mdx}"
-  ],
+  content: ["./src/**/*.{ts,tsx,js,jsx,mdx}"],
   theme: {
     container: {
       center: true,
-      padding: "1rem",
-      screens: { "2xl": "1280px" }
+      padding: { DEFAULT: "1rem", sm: "1.5rem", lg: "2rem" },
+      screens: { "2xl": "1240px" }
     },
     extend: {
       colors: {
-        bg: {
-          DEFAULT: "#0a0a12",
-          soft: "#11111b",
-          card: "rgba(255,255,255,0.04)"
+        ink: {
+          DEFAULT: "#0f172a",
+          soft: "#1e293b",
+          muted: "#475569"
+        },
+        surface: {
+          DEFAULT: "#ffffff",
+          soft: "#f8f7ff",
+          alt: "#f5f3ff"
+        },
+        line: {
+          DEFAULT: "#e7e5f1",
+          strong: "#d6d3e8"
         },
         brand: {
-          50: "#f3eaff",
-          100: "#e3ceff",
-          200: "#c79dff",
-          300: "#aa6cff",
-          400: "#8e3bff",
-          500: "#7a1fff",
-          600: "#6210e6",
-          700: "#4a0bb3",
-          800: "#330880",
-          900: "#1d044d"
+          50: "#f4f1ff",
+          100: "#ebe4ff",
+          200: "#d6c8ff",
+          300: "#b89eff",
+          400: "#9670ff",
+          500: "#7c3aed",
+          600: "#6d28d9",
+          700: "#5b21b6",
+          800: "#4c1d95",
+          900: "#2e1065"
         },
-        accent: {
-          gold: "#ffd166",
-          mint: "#06d6a0",
-          coral: "#ef476f",
-          sky: "#118ab2"
-        }
+        sun: {
+          50: "#fffbeb",
+          100: "#fef3c7",
+          200: "#fde68a",
+          300: "#fcd34d",
+          400: "#fbbf24",
+          500: "#f59e0b",
+          600: "#d97706",
+          700: "#b45309"
+        },
+        leaf: {
+          50: "#ecfdf5",
+          100: "#d1fae5",
+          200: "#a7f3d0",
+          300: "#6ee7b7",
+          400: "#34d399",
+          500: "#10b981",
+          600: "#059669",
+          700: "#047857"
+        },
+        coral: "#f43f5e",
+        sky: "#0ea5e9"
       },
       fontFamily: {
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],
         display: ["var(--font-display)", "system-ui", "sans-serif"]
       },
       boxShadow: {
-        glow: "0 0 0 1px rgba(170,108,255,0.25), 0 10px 40px -10px rgba(122,31,255,0.6)",
-        soft: "0 1px 0 rgba(255,255,255,0.05) inset, 0 10px 30px -15px rgba(0,0,0,0.5)"
+        card: "0 1px 0 rgba(15,23,42,0.04), 0 4px 14px -8px rgba(15,23,42,0.10)",
+        cardHover: "0 1px 0 rgba(15,23,42,0.04), 0 22px 50px -22px rgba(124,58,237,0.30)",
+        button: "0 1px 0 rgba(255,255,255,0.6) inset, 0 8px 18px -8px rgba(124,58,237,0.45)",
+        sun: "0 1px 0 rgba(255,255,255,0.6) inset, 0 10px 22px -8px rgba(245,158,11,0.55)",
+        leaf: "0 1px 0 rgba(255,255,255,0.6) inset, 0 10px 22px -8px rgba(16,185,129,0.55)"
       },
       backgroundImage: {
-        "mesh": "radial-gradient(60% 80% at 20% 10%, rgba(122,31,255,0.45) 0%, rgba(0,0,0,0) 60%), radial-gradient(50% 60% at 80% 30%, rgba(6,214,160,0.35) 0%, rgba(0,0,0,0) 60%), radial-gradient(60% 80% at 70% 90%, rgba(255,209,102,0.3) 0%, rgba(0,0,0,0) 60%)",
-        "grid": "linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)",
-        "shine": "linear-gradient(120deg, transparent 0%, transparent 35%, rgba(255,255,255,0.25) 50%, transparent 65%, transparent 100%)"
+        "hero": "linear-gradient(135deg, #6d28d9 0%, #7c3aed 35%, #8b5cf6 70%, #a78bfa 100%)",
+        "shine": "linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.55) 50%, transparent 70%)",
+        "grid-light": "linear-gradient(rgba(124,58,237,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(124,58,237,0.06) 1px, transparent 1px)"
       },
       backgroundSize: {
-        "grid": "32px 32px"
+        "grid-light": "28px 28px"
+      },
+      borderRadius: {
+        "4xl": "2rem"
       },
       keyframes: {
-        float: {
-          "0%, 100%": { transform: "translateY(0px) rotate(0deg)" },
-          "50%": { transform: "translateY(-12px) rotate(2deg)" }
+        floatY: {
+          "0%, 100%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-10px)" }
         },
         shimmer: {
           "100%": { transform: "translateX(100%)" }
         },
-        spinSlow: {
-          to: { transform: "rotate(360deg)" }
+        bob: {
+          "0%, 100%": { transform: "translateY(0) rotate(-2deg)" },
+          "50%": { transform: "translateY(-8px) rotate(2deg)" }
         },
-        pulseGlow: {
-          "0%, 100%": { boxShadow: "0 0 0 0 rgba(122,31,255,0.6)" },
-          "50%": { boxShadow: "0 0 0 18px rgba(122,31,255,0)" }
-        },
-        gradientShift: {
-          "0%, 100%": { backgroundPosition: "0% 50%" },
-          "50%": { backgroundPosition: "100% 50%" }
+        ringPulse: {
+          "0%, 100%": { boxShadow: "0 0 0 0 rgba(251,191,36,0.6)" },
+          "50%": { boxShadow: "0 0 0 14px rgba(251,191,36,0)" }
         },
         marquee: {
           from: { transform: "translateX(0)" },
@@ -78,11 +104,10 @@ const config: Config = {
         }
       },
       animation: {
-        float: "float 6s ease-in-out infinite",
-        shimmer: "shimmer 2s linear infinite",
-        spinSlow: "spinSlow 12s linear infinite",
-        pulseGlow: "pulseGlow 2.4s ease-out infinite",
-        gradientShift: "gradientShift 12s ease infinite",
+        floatY: "floatY 6s ease-in-out infinite",
+        shimmer: "shimmer 1.6s linear infinite",
+        bob: "bob 5s ease-in-out infinite",
+        ringPulse: "ringPulse 2.4s ease-out infinite",
         marquee: "marquee 30s linear infinite"
       }
     }

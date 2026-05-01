@@ -29,11 +29,12 @@ export default function TasksPage() {
       <Reveal>
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
-            <h1 className="font-display text-3xl font-semibold sm:text-4xl">Earn from tasks</h1>
-            <p className="mt-1 text-zinc-400">Pick a task. Submit proof. Get paid in points.</p>
+            <span className="pill">Tasks · {tasks.length} live</span>
+            <h1 className="h-display mt-3 text-3xl sm:text-4xl">Earn from tasks</h1>
+            <p className="mt-1 text-ink-muted">Pick a task. Submit proof. Get paid in points.</p>
           </div>
           <div className="relative w-full sm:w-72">
-            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-zinc-500" />
+            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-muted" />
             <input
               value={q}
               onChange={(e) => setQ(e.target.value)}
@@ -45,7 +46,7 @@ export default function TasksPage() {
       </Reveal>
 
       <LayoutGroup id="cat-pills">
-        <div className="card flex flex-wrap items-center gap-1 p-1">
+        <div className="card inline-flex flex-wrap items-center gap-1 !rounded-full p-1.5">
           {allCats.map((c) => {
             const meta = categories.find((cat) => cat.key === c);
             const label = c === "all" ? "All" : meta?.label;
@@ -55,14 +56,14 @@ export default function TasksPage() {
                 key={c}
                 onClick={() => setActive(c)}
                 className={cn(
-                  "relative z-10 rounded-lg px-3 py-1.5 text-sm transition-colors",
-                  isActive ? "text-white" : "text-zinc-400 hover:text-white"
+                  "relative z-10 rounded-full px-4 py-1.5 text-sm font-semibold transition-colors",
+                  isActive ? "text-white" : "text-ink-muted hover:text-ink"
                 )}
               >
                 {isActive && (
                   <motion.span
                     layoutId="cat-pill"
-                    className="absolute inset-0 -z-10 rounded-lg bg-gradient-to-br from-brand-500 to-brand-700"
+                    className="absolute inset-0 -z-10 rounded-full bg-gradient-to-b from-brand-500 to-brand-700 shadow-button"
                     transition={{ type: "spring", stiffness: 380, damping: 30 }}
                   />
                 )}
@@ -89,7 +90,7 @@ export default function TasksPage() {
           ))}
         </AnimatePresence>
         {filtered.length === 0 && (
-          <div className="card col-span-full grid place-items-center p-10 text-zinc-400">
+          <div className="card col-span-full grid place-items-center p-10 text-ink-muted">
             No tasks match. Try a different filter.
           </div>
         )}
