@@ -10,6 +10,7 @@ build
 .turbo
 .cache
 coverage
+*.tsbuildinfo
 
 # prisma
 apps/api/prisma/dev.db
