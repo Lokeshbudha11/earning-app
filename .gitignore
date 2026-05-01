@@ -1,0 +1,21 @@
+node_modules
+.next
+out
+dist
+build
+.DS_Store
+.env
+.env.local
+*.log
+.turbo
+.cache
+coverage
+
+# prisma
+apps/api/prisma/dev.db
+apps/api/prisma/dev.db-journal
+apps/api/prisma/migrations/dev.db*
+
+# editor
+.vscode
+.idea

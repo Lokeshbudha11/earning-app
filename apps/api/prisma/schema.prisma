@@ -1,0 +1,85 @@
+// Blaster Prisma schema
+// Demo runs on SQLite. Swap `provider` to "postgresql" for production.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String   @id @default(cuid())
+  email         String   @unique
+  name          String
+  avatar        String?
+  referralCode  String   @unique
+  pointsBalance Int      @default(0)
+  cashBalance   Int      @default(0)
+  tier          String   @default("Bronze")
+  streak        Int      @default(0)
+  createdAt     DateTime @default(now())
+
+  submissions  Submission[]
+  transactions Transaction[]
+  referralsOut Referral[]    @relation("Referrer")
+  referralsIn  Referral[]    @relation("Referee")
+}
+
+model Task {
+  id            String   @id @default(cuid())
+  title         String
+  description   String
+  category      String   // microtask | video | offerwall | job
+  rewardPoints  Int
+  durationMin   Int
+  difficulty    String   // easy | medium | hard
+  slotsLeft     Int      @default(100)
+  expiresIn     String   @default("24h")
+  provider      String?
+  status        String   @default("active") // active | paused | archived
+  createdAt     DateTime @default(now())
+
+  submissions   Submission[]
+}
+
+model Submission {
+  id         String   @id @default(cuid())
+  userId     String
+  taskId     String
+  proofUrl   String?
+  status     String   @default("pending") // pending | approved | rejected
+  reviewedAt DateTime?
+  createdAt  DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+  task Task @relation(fields: [taskId], references: [id])
+}
+
+model Transaction {
+  id          String   @id @default(cuid())
+  userId      String
+  amount      Int
+  unit        String   // points | NPR
+  kind        String   // earn | withdraw | bonus | referral
+  method      String?  // eSewa | Khalti | PayPal | Bank
+  status      String   @default("pending") // pending | completed | failed
+  ref         String
+  processedAt DateTime?
+  createdAt   DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+model Referral {
+  id          String   @id @default(cuid())
+  referrerId  String
+  refereeId   String
+  bonusPoints Int      @default(500)
+  createdAt   DateTime @default(now())
+
+  referrer User @relation("Referrer", fields: [referrerId], references: [id])
+  referee  User @relation("Referee",  fields: [refereeId],  references: [id])
+}
