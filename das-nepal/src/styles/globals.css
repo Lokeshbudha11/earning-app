@@ -1,0 +1,205 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-forest: #0b3d2e;
+  --color-neon: #8dff8a;
+  --color-ink: #050505;
+  --color-earth: #5e3b28;
+  --color-electric: #00d1ff;
+  --color-gold: #d9b86c;
+
+  --grid-color: rgba(141, 255, 138, 0.07);
+  --grid-size: 56px;
+
+  color-scheme: dark;
+}
+
+html,
+body {
+  background: radial-gradient(
+      1200px 800px at 70% -10%,
+      rgba(0, 209, 255, 0.08),
+      transparent 60%
+    ),
+    radial-gradient(
+      900px 700px at 0% 10%,
+      rgba(141, 255, 138, 0.07),
+      transparent 60%
+    ),
+    radial-gradient(
+      1100px 900px at 50% 110%,
+      rgba(217, 184, 108, 0.05),
+      transparent 60%
+    ),
+    var(--color-ink);
+  color: #e8efe9;
+  font-family: var(--font-sans), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+::selection {
+  background: rgba(141, 255, 138, 0.35);
+  color: #050505;
+}
+
+/* Lenis smooth scroll */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+@layer components {
+  .container-cine {
+    @apply mx-auto w-full max-w-[1480px] px-6 md:px-10 lg:px-16;
+  }
+
+  .heading-display {
+    font-family: var(--font-display), ui-sans-serif, system-ui;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 0.95;
+  }
+
+  .text-mono {
+    font-family: ui-monospace, "SFMono-Regular", monospace;
+    letter-spacing: 0.02em;
+  }
+
+  .glass {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.04),
+      rgba(255, 255, 255, 0.015) 40%,
+      rgba(255, 255, 255, 0.04)
+    );
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+  }
+
+  .glass-strong {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.06),
+      rgba(255, 255, 255, 0.02) 50%,
+      rgba(255, 255, 255, 0.06)
+    );
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(22px) saturate(160%);
+    -webkit-backdrop-filter: blur(22px) saturate(160%);
+  }
+
+  .holo-border {
+    position: relative;
+  }
+  .holo-border::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      135deg,
+      rgba(141, 255, 138, 0.55),
+      rgba(0, 209, 255, 0.4) 35%,
+      rgba(217, 184, 108, 0.4) 65%,
+      rgba(141, 255, 138, 0.2)
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .grid-bg {
+    background-image:
+      linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+    background-size: var(--grid-size) var(--grid-size);
+    mask-image: radial-gradient(ellipse at center, black 35%, transparent 80%);
+  }
+
+  .text-gradient-primary {
+    background: linear-gradient(120deg, #ffffff 0%, #b4ffb1 35%, #00d1ff 70%, #d9b86c 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .text-gradient-emerald {
+    background: linear-gradient(120deg, #8dff8a, #00d1ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .scanline {
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(141, 255, 138, 0.04) 0px,
+      rgba(141, 255, 138, 0.04) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+  }
+
+  .btn-cine {
+    @apply relative inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium tracking-wide transition-all duration-300;
+  }
+
+  .glow-dot::after {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    box-shadow: 0 0 18px rgba(141, 255, 138, 0.7);
+    pointer-events: none;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(#0b3d2e, #00343f);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(#8dff8a, #00d1ff);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
