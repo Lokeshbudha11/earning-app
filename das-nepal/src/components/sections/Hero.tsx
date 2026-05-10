@@ -6,8 +6,9 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 
-const HeroScene = dynamic(
-  () => import("@/components/three/HeroScene").then((m) => m.HeroScene),
+const HeroSceneSafe = dynamic(
+  () =>
+    import("@/components/three/HeroSceneSafe").then((m) => m.HeroSceneSafe),
   { ssr: false }
 );
 
@@ -45,7 +46,7 @@ export function Hero() {
     >
       {/* 3D scene */}
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <HeroScene />
+        <HeroSceneSafe />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_60%,transparent,rgba(5,5,5,0.6)_60%,#050505)]" />
         <div className="absolute inset-0 grid-bg opacity-50" />
         <div className="absolute inset-x-0 bottom-0 h-72 bg-gradient-to-b from-transparent to-ink-900" />
