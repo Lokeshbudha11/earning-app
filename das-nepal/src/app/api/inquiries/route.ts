@@ -53,7 +53,17 @@ export async function POST(req: NextRequest) {
   }
 }
 
-export async function GET() {
+export async function GET(req: NextRequest) {
+  // GET returns previously-submitted inquiries (PII), so it must be auth-gated.
+  // Require a Bearer token matching INQUIRIES_ADMIN_TOKEN. If the env var is
+  // unset, the endpoint is locked entirely (no "empty token" backdoor).
+  const expected = process.env.INQUIRIES_ADMIN_TOKEN;
+  const auth = req.headers.get("authorization") ?? "";
+  const provided = auth.startsWith("Bearer ") ? auth.slice(7) : "";
+  if (!expected || provided !== expected) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   const db = getDb();
   if (db) {
     try {
