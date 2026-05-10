@@ -28,6 +28,7 @@ export function Contact() {
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (status === "submitting") return;
     setStatus("submitting");
     setError(null);
     try {

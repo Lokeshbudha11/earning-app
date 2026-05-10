@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { timingSafeEqual } from "crypto";
 import { z } from "zod";
 import { getDb } from "@/lib/db";
 
@@ -60,7 +61,16 @@ export async function GET(req: NextRequest) {
   const expected = process.env.INQUIRIES_ADMIN_TOKEN;
   const auth = req.headers.get("authorization") ?? "";
   const provided = auth.startsWith("Bearer ") ? auth.slice(7) : "";
-  if (!expected || provided !== expected) {
+  // Constant-time comparison to avoid timing side-channel attacks.
+  // The length check is intentional: timingSafeEqual throws on unequal-length
+  // Buffers, and a length leak is acceptable compared to a content leak.
+  const expectedBuf = expected ? Buffer.from(expected) : null;
+  const providedBuf = Buffer.from(provided);
+  const authorized =
+    !!expectedBuf &&
+    providedBuf.length === expectedBuf.length &&
+    timingSafeEqual(providedBuf, expectedBuf);
+  if (!authorized) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
