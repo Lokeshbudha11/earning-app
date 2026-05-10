@@ -42,6 +42,8 @@ export async function POST(req: NextRequest) {
 
     const id = `mem_${Date.now().toString(36)}`;
     memory.unshift({ ...data, id, createdAt: new Date().toISOString() });
+    // Cap in-memory store so the module-level array can't grow without bound.
+    if (memory.length > 100) memory.length = 100;
     return NextResponse.json({ ok: true, id, mode: "memory" });
   } catch (err) {
     return NextResponse.json(
